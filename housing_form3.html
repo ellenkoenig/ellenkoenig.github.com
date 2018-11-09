@@ -1,0 +1,137 @@
+<html>
+<head></head>
+<body>
+
+<style type="text/css">
+	.forminput {
+    width: 450px;
+}
+</style>
+
+<link rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/animate.css/animate.css" type="text/css" />
+
+    <link rel="stylesheet" href="https://unpkg.com/rmodal/dist/rmodal.css" type="text/css" />
+    <script type="text/javascript" src="https://unpkg.com/rmodal/dist/rmodal.js"></script>
+    <style type="text/css">
+      .modal .modal-dialog {
+        width: 400px;
+      }
+    </style>
+
+    <script type="text/javascript">
+        window.onload = function() {
+            var modalYes = new RModal(document.getElementById('modalYes'), {
+                beforeOpen: function(next) {
+                    next();
+                }
+                , afterOpen: function() {
+                }
+                , beforeClose: function(next) {
+                    next();
+                }
+                , afterClose: function() {
+                }
+            });
+            document.addEventListener('keydown', function(ev) {
+                modalYes.keydown(ev);
+            }, false);
+            window.modalYes = modalYes;
+            var modalNo = new RModal(document.getElementById('modalNo'), {
+                beforeOpen: function(next) {
+                    next();
+                }
+                , afterOpen: function() {
+                }
+                , beforeClose: function(next) {
+                    next();
+                }
+                , afterClose: function() {
+                }
+            });
+            document.addEventListener('keydown', function(ev) {
+                modalNo.keydown(ev);
+            }, false);
+            window.modalNo = modalNo;
+        }
+    </script>
+<script type="text/javascript">
+	function fancyAICall(argument) {
+		var name = document.getElementById('name').value;
+		var surname = document.getElementById('surname').value;
+		var email = document.getElementById('email').value;
+		var income = document.getElementById("income").value;
+		var age = document.getElementById("name").value;
+		var gender = document.getElementById('gender').value.toLowerCase();
+		var ethnicity = document.getElementById('ethnicity').value.toLowerCase();
+		if (! name || !surname || !email || !income || ! age || !gender || !ethnicity ) {
+			modalNo.open()
+		} else if (age < 30 || age > 45 || (gender == 'male' && (ethnicity == 'white' || ethnicity == 'caucasian')) || income < 100000) {
+			modalNo.open();
+		}
+		else {
+			modalYes.open();
+		}
+		return false;
+	}			
+</script>
+<form onsubmit="return false;">
+  <table>
+  	<tr><td> <strong>First name</strong></td><td> <input type="text" id="name" class="forminput"></td></tr>
+  	<tr><td><strong>Surname</strong></strong></td><td>  <input type="text" id="surname" class="forminput"></td></tr>
+	<tr><td><strong>E-mail</strong></td><td>  <input type="text" id="email" class="forminput"></td></tr>
+	<tr><td><strong>Age</strong></td><td>  <input type="number" id="age" class="forminput"></td></tr>
+	<tr><td><strong>Income (in €€)</strong></td><td>  <input type="number" id="income" class="forminput"></td></tr>
+	<tr><td><strong><strong>Gender</strong></td><td>  <input type="text" id="gender" class="forminput"></td></tr>
+	<tr><td><strong>Ethnicity</strong></td><td>  <input type="text" id="ethnicity" class="forminput"></td></tr>  
+	 <tr><td><strong>Previous address</strong></td><td>  <input type="textarea" id="previousAddress" class="forminput"></td></tr>
+	 <tr><td></td><td><input type="submit" onclick="fancyAICall()"></td></tr>
+  </table>
+</form>
+
+  <div id="modalYes" class="modal">
+        <div class="modal-dialog animated">
+            <div class="modal-content">
+                <form class="form-horizontal" method="get">
+                    <div class="modal-header">
+                        <strong>YES!</strong>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="dummyText" class="control-label col-xs-4"><p>Splendid! We are marvellously pleased to offer you the SAGA built, Grosvenor finished apartment in Berlin Mitte!</p> <p>On behalf of the residents of the tower, we should say, what a privilege to have you here!</p></label>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="btn btn-default" type="button" onclick="modalYes.close();">Ok</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<div id="modalNo" class="modal">
+        <div class="modal-dialog animated">
+            <div class="modal-content">
+                <form class="form-horizontal" method="get">
+                    <div class="modal-header">
+                        <strong>We are so sorry...</strong>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="dummyText" class="control-label col-xs-4"><p>We regret to inform you that at this time, we have chosen that your residence remains in “Somewhere far away from the city of Berlin”. </p><p>Please feel free to contact us again. We look forward to the possibility of allocation in the future!</p></label>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button class="btn btn-default" type="button" onclick="modalNo.close();">Ok</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
