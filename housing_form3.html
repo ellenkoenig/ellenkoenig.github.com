@@ -70,7 +70,7 @@
 		var ethnicity = document.getElementById('ethnicity').value.toLowerCase();
 		if (! name || !surname || !email || !income || ! age || !gender || !ethnicity ) {
 			modalNo.open()
-		} else if (age < 30 || age > 45 || (gender != 'male' || gender='man') && (ethnicity != 'white' || ethnicity == 'caucasian') || income < 70000) {
+		} else if (age < 30 || age > 45 || !(gender == 'male' || gender == 'man') && !°(ethnicity == 'white' || ethnicity == 'caucasian') || income < 70000) {
 			modalNo.open();
 		}
 		else {
